@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import smtplib
+import os
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 from email.MIMEBase import MIMEBase
@@ -8,11 +9,12 @@ from email import Encoders
 
 class GMailer():
     """A Class for emailing text and attachments"""
-    self.gmail_user = "inappropriamatic@gmail.com"
-    self.gmail_pwd = "hunter2"
+    def __init__(self):
+        self.gmail_user = "inappropriamatic@gmail.com"
+        self.gmail_pwd = "hunter2"
     
     
-    def set_credientials(user, password):
+    def set_credentials(user, password):
         self.gmail_user = user
         self.gmail_pwd = password
     
@@ -20,7 +22,7 @@ class GMailer():
     def mail(self, to, subject, text, attachments=[]):
        msg = MIMEMultipart()
     
-       msg['From'] = gmail_user
+       msg['From'] = self.gmail_user
        msg['To'] = to
        msg['Subject'] = subject
     
@@ -39,7 +41,7 @@ class GMailer():
        mailServer.ehlo()
        mailServer.starttls()
        mailServer.ehlo()
-       mailServer.login(gmail_user, gmail_pwd)
-       mailServer.sendmail(gmail_user, to, msg.as_string())
+       mailServer.login(self.gmail_user, self.gmail_pwd)
+       mailServer.sendmail(self.gmail_user, to, msg.as_string())
        mailServer.close()
 
